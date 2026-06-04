@@ -16,3 +16,13 @@ public record CadastrarCategoriaViewModel(
 
     CorCategoria Cor
 );
+
+public record EditarCategoriaViewModel(
+    string Id,
+
+    [Required(ErrorMessage = "O campo \"Nome\" deve ser preenchido.")]
+    [StringLength(50, ErrorMessage = "O campo \"Nome\" deve conter no máximo 50 caracteres.")]
+    string Nome,
+
+    CorCategoria Cor
+);

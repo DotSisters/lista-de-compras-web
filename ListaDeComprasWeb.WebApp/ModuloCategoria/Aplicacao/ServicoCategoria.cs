@@ -29,6 +29,21 @@ public class ServicoCategoria
         return Result.Ok();
     }
 
+    public Result Editar(EditarCategoriaDto dto)
+    {
+        if (ExisteCategoriaComNome(dto.Nome, dto.Id))
+            return Falha("Nome", "Já existe uma categoria com esse nome.");
+
+        Categoria categoriaAtualizada = new Categoria(dto.Nome, dto.Cor);
+
+        bool conseguiuEditar = repositorioCategoria.Editar(dto.Id, categoriaAtualizada);
+
+        if (!conseguiuEditar)
+            return Result.Fail("Categoria não encontrada.");
+
+        return Result.Ok();
+    }
+
     public List<ListarCategoriasDto> SelecionarTodos()
     {
         List<Categoria> categorias = repositorioCategoria.SelecionarTodos();

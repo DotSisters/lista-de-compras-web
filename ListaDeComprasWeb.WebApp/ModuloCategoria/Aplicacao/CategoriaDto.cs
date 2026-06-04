@@ -13,6 +13,12 @@ public record CadastrarCategoriaDto(
     CorCategoria Cor
 );
 
+public record EditarCategoriaDto(
+    string Id,
+    string Nome,
+    CorCategoria Cor
+);
+
 public record DetalhesCategoriaDto(
     string Id,
     string Nome,
