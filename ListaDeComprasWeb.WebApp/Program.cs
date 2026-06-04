@@ -1,17 +1,17 @@
+using ListaDeComprasWeb.WebApp.Compartilhado.Aplicacao;
+using ListaDeComprasWeb.WebApp.Compartilhado.Apresentacao;
+using ListaDeComprasWeb.WebApp.Compartilhado.Infra;
+using ListaDeComprasWeb.WebApp.ModuloCategoria.Aplicacao;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuração de Serviços
-builder.Services.AddControllersWithViews().AddRazorOptions(options =>
-{
-    // Resetar a configuração padrão do MVC
-    options.ViewLocationFormats.Clear();
+builder.Services.AddInfraRepositories();
 
-    // Views dos módulos: /ModuloCategorias/Apresentacao/Views/Listar.cshtml
-    options.ViewLocationFormats.Add("/Modulo{1}/Apresentacao/Views/{0}.cshtml");
+builder.Services.AddApplicationServices();
 
-    // Views compartilhadas: /Compartilhado/Apresentacao/Views/_Layout.cshtml
-    options.ViewLocationFormats.Add("/Compartilhado/Apresentacao/Views/{0}.cshtml");
-});
+builder.Services.AddPresentation();
+
+builder.Services.AddScoped<ServicoCategoria>();
 
 var app = builder.Build();
 
@@ -21,5 +21,5 @@ app.UseStaticFiles();
 app.UseRouting();
 app.MapDefaultControllerRoute();
 
-// Execução do App
+// Execução do Servidor
 app.Run();

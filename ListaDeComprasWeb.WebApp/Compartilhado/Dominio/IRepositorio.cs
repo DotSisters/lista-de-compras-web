@@ -1,6 +1,4 @@
-using ListaDeComprasWeb.WebApp.Compartilhado.Dominio;
-
-namespace ListaDeComprasWeb.WebApp.Compartilhado.Infra;
+namespace ListaDeComprasWeb.WebApp.Compartilhado.Dominio;
 
 public interface IRepositorio<T> where T : EntidadeBase<T>
 {

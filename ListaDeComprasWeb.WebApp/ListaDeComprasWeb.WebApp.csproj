@@ -15,4 +15,9 @@
     <Folder Include="ModuloHome\Apresentacao\Views\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="16.1.1" />
+    <PackageReference Include="FluentResults" Version="4.0.0" />
+  </ItemGroup>
+
 </Project>
