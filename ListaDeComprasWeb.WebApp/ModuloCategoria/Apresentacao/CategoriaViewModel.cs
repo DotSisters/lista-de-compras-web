@@ -26,3 +26,9 @@ public record EditarCategoriaViewModel(
 
     CorCategoria Cor
 );
+
+public record ExcluirCategoriaViewModel(
+    string Id,
+    string Nome,
+    CorCategoria Cor
+);
