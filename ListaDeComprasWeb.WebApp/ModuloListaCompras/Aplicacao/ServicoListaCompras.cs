@@ -32,7 +32,6 @@ public class ServicoListaCompras
         return Result.Ok();
     }
 
-
     public Result Editar(EditarListaDeComprasDto dto)
     {
 
@@ -42,6 +41,21 @@ public class ServicoListaCompras
 
         if (!conseguiuEditar)
             return Result.Fail("Lista de compras não encontrada.");
+
+        return Result.Ok();
+    }
+
+    public Result Excluir(string id)
+    {
+        ListaCompras? lista = repositorioListaCompras.SelecionarPorId(id);
+
+        if (lista == null)
+            return Result.Fail("Lista de compras não encontrada.");
+
+        bool conseguiuExcluir = repositorioListaCompras.Excluir(lista);
+
+        if (!conseguiuExcluir)
+            return Result.Fail("Não foi possível excluir a categoria.");
 
         return Result.Ok();
     }

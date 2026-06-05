@@ -87,4 +87,35 @@ public class ListaComprasController(ServicoListaCompras servicoListaCompras, IMa
 
         return RedirectToAction(nameof(Listar));
     }
+
+    [HttpGet]
+    public ActionResult Excluir(string id)
+    {
+        Result<DetalhesListaDeComprasDto> resultado = servicoListaCompras.SelecionarPorId(id);
+
+        if (resultado.IsFailed)
+        {
+            TempData.AddErrorMessage(resultado);
+
+            return RedirectToAction(nameof(Listar));
+        }
+
+        ExcluirListaDeComprasViewModel excluirVm =
+            mapeador.Map<ExcluirListaDeComprasViewModel>(resultado.Value);
+
+        return View(excluirVm);
+    }
+
+    [HttpPost]
+    public ActionResult Excluir(ExcluirListaDeComprasViewModel excluirVm)
+    {
+        Result resultado = servicoListaCompras.Excluir(excluirVm.Id);
+
+        if (resultado.IsFailed)
+            TempData.AddErrorMessage(resultado);
+
+        return RedirectToAction(nameof(Listar));
+    }
+
+
 }

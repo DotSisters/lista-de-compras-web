@@ -19,3 +19,8 @@ public record EditarListaDeComprasViewModel(
     string Id,
     string Nome
 );
+
+public record ExcluirListaDeComprasViewModel(
+    string Id,
+    string Nome
+);
