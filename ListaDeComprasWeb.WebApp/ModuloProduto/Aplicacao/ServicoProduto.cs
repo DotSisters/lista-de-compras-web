@@ -18,12 +18,36 @@ public class ServicoProduto
         this.repositorioCategoria = repositorioCategoria;
     }
 
+    public Result Cadastrar(CadastrarProdutoDto dto)
+    {
+        Categoria? categoriaSelecionada = repositorioCategoria.SelecionarPorId(dto.CategoriaNome);
+
+        if (categoriaSelecionada == null)
+        {
+            return Result.Fail(
+                new Error("Selecione uma categoria válida.")
+                    .WithMetadata("Campo", nameof(dto.CategoriaNome))
+            );
+        }
+
+        Produto novoProduto = new Produto(
+            dto.Nome,
+            dto.UnidadeMedida,
+            dto.PrecoAproximado,
+            categoriaSelecionada!
+        );
+
+        repositorioProduto.Cadastrar(novoProduto);
+
+        return Result.Ok();
+    }
+
     public Result<DetalhesProdutoDto> SelecionarPorId(string id)
     {
         Produto? produto = repositorioProduto.SelecionarPorId(id);
 
         if (produto == null)
-            return Result.Fail("Produto não encontrada.");
+            return Result.Fail("Produto não encontrado.");
 
         return Result.Ok(new DetalhesProdutoDto(
             produto.Id,
@@ -31,7 +55,7 @@ public class ServicoProduto
             produto.UnidadeMedida,
             produto.PrecoAproximado,
             produto.Categoria.Nome
-            ));
+        ));
     }
 
     public List<ListarProdutosDto> SelecionarTodos()
