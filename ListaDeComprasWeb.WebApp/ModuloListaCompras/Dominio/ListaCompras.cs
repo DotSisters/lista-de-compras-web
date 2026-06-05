@@ -1,11 +1,17 @@
 using ListaDeComprasWeb.WebApp.Compartilhado.Dominio;
+using System.Text.Json.Serialization;
 
 namespace ListaDeComprasWeb.WebApp.ModuloListaCompras.Dominio;
 
 public class ListaCompras : EntidadeBase<ListaCompras>
 {
+    [JsonInclude]
     public string Nome { get; private set; }
+
+    [JsonInclude]
     public DateTime DataCriacao { get; private set; }
+
+    [JsonInclude]
     public StatusListaCompras Status { get; private set; }
 
     public ListaCompras()
