@@ -10,9 +10,8 @@
     <Folder Include="Compartilhado\" />
     <Folder Include="Compartilhado\Apresentacao\" />
     <Folder Include="Compartilhado\Views\" />
-    <Folder Include="ModuloHome\" />
-    <Folder Include="ModuloHome\Apresentacao\" />
-    <Folder Include="ModuloHome\Apresentacao\Views\" />
+    <Folder Include="ModuloProduto\" />
+    <Folder Include="ModuloProduto\Infra\" />
   </ItemGroup>
 
   <ItemGroup>

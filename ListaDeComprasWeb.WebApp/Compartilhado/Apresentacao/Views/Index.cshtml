@@ -13,6 +13,8 @@ ViewBag.Titulo = "Página Inicial";
 
         <a class="btn btn-primary rounded-pill px-4" asp-controller="Categoria" asp-action="Listar">Acessar
             Categorias</a>
+        <a class="btn btn-primary rounded-pill px-4" asp-controller="Produto" asp-action="Listar">Acessar
+            Produtos</a>
     </div>
 
     <div class="col-lg-5">
@@ -26,6 +28,13 @@ ViewBag.Titulo = "Página Inicial";
                         Controle de Categorias
                         <span class="badge text-bg-primary rounded-pill">Abrir</span>
                     </a>
+
+                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                        asp-controller="Produto" asp-action="Listar">
+                        Controle de Produtos
+                        <span class="badge text-bg-primary rounded-pill">Abrir</span>
+                    </a>
+
                 </div>
             </div>
         </div>
