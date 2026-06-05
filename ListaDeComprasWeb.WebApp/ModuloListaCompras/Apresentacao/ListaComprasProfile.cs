@@ -8,6 +8,7 @@ public class ListaComprasProfile : Profile
     public ListaComprasProfile()
     {
         CreateMap<ListarListasDeComprasDto, ListarListasDeComprasViewModel>();
+        CreateMap<CadastrarListaDeComprasViewModel, CadastrarListaDeCompraDto>();
 
     }
 }

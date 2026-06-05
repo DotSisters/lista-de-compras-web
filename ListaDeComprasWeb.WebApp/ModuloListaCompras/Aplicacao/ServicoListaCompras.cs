@@ -1,3 +1,4 @@
+using FluentResults;
 using ListaDeComprasWeb.WebApp.ModuloListaCompras.Dominio;
 
 namespace ListaDeComprasWeb.WebApp.ModuloListaCompras.Aplicacao;
@@ -18,5 +19,16 @@ public class ServicoListaCompras
         return categorias
             .Select(l => new ListarListasDeComprasDto(l.Id, l.Nome, l.DataCriacao, l.Status.ToString()))
             .ToList();
+    }
+
+    public Result Cadastrar(CadastrarListaDeCompraDto dto)
+    {
+        ListaCompras novaCategoria = new ListaCompras(
+            dto.Nome
+        );
+
+        repositorioListaCompras.Cadastrar(novaCategoria);
+
+        return Result.Ok();
     }
 }
