@@ -48,4 +48,43 @@ public class ListaComprasController(ServicoListaCompras servicoListaCompras, IMa
 
         return RedirectToAction(nameof(Listar));
     }
+
+    [HttpGet]
+    public ActionResult Editar(string id)
+    {
+        Result<DetalhesListaDeComprasDto> resultado = servicoListaCompras.SelecionarPorId(id);
+
+        if (resultado.IsFailed)
+        {
+            TempData.AddErrorMessage(resultado);
+
+            return RedirectToAction(nameof(Listar));
+        }
+
+        DetalhesListaDeComprasDto dto = resultado.Value;
+
+        EditarListaDeComprasViewModel editarVm = mapeador.Map<EditarListaDeComprasViewModel>(dto);
+
+        return View(editarVm);
+    }
+
+    [HttpPost]
+    public ActionResult Editar(EditarListaDeComprasViewModel editarVm)
+    {
+        if (!ModelState.IsValid)
+            return View(editarVm);
+
+        EditarListaDeComprasDto dto = mapeador.Map<EditarListaDeComprasDto>(editarVm);
+
+        Result resultado = servicoListaCompras.Editar(dto);
+
+        if (resultado.IsFailed)
+        {
+            ModelState.AddModelError(resultado);
+
+            return View(editarVm);
+        }
+
+        return RedirectToAction(nameof(Listar));
+    }
 }

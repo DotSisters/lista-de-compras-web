@@ -23,12 +23,36 @@ public class ServicoListaCompras
 
     public Result Cadastrar(CadastrarListaDeCompraDto dto)
     {
-        ListaCompras novaCategoria = new ListaCompras(
+        ListaCompras novaListaDeCompras = new ListaCompras(
             dto.Nome
         );
 
-        repositorioListaCompras.Cadastrar(novaCategoria);
+        repositorioListaCompras.Cadastrar(novaListaDeCompras);
 
         return Result.Ok();
+    }
+
+
+    public Result Editar(EditarListaDeComprasDto dto)
+    {
+
+        ListaCompras listaAtualizada = new ListaCompras(dto.Nome);
+
+        bool conseguiuEditar = repositorioListaCompras.Editar(dto.Id, listaAtualizada);
+
+        if (!conseguiuEditar)
+            return Result.Fail("Lista de compras não encontrada.");
+
+        return Result.Ok();
+    }
+
+    public Result<DetalhesListaDeComprasDto> SelecionarPorId(string id)
+    {
+        ListaCompras? lista = repositorioListaCompras.SelecionarPorId(id);
+
+        if (lista == null)
+            return Result.Fail("Lista de compras não encontrada.");
+
+        return Result.Ok(new DetalhesListaDeComprasDto(lista.Id, lista.Nome));
     }
 }

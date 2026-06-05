@@ -9,6 +9,9 @@ public class ListaComprasProfile : Profile
     {
         CreateMap<ListarListasDeComprasDto, ListarListasDeComprasViewModel>();
         CreateMap<CadastrarListaDeComprasViewModel, CadastrarListaDeCompraDto>();
+        CreateMap<EditarListaDeComprasViewModel, EditarListaDeComprasDto>();
+
+        CreateMap<DetalhesListaDeComprasDto, EditarListaDeComprasViewModel>();
 
     }
 }

@@ -12,3 +12,13 @@ public record ListarListasDeComprasDto(
 public record CadastrarListaDeCompraDto(
     string Nome
 );
+
+public record EditarListaDeComprasDto(
+    string Id,
+    string Nome
+);
+
+public record DetalhesListaDeComprasDto(
+    string Id,
+    string Nome
+);
