@@ -55,3 +55,11 @@ public record EditarProdutoViewModel(
     [ValidateNever]
     List<OpcaoCategoriaViewModel>? Categorias = null
 );
+
+public record ExcluirProdutoViewModel(
+    string Id,
+    string Nome,
+    string UnidadeMedida,
+    decimal PrecoAproximado,
+    string CategoriaNome
+);

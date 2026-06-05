@@ -15,5 +15,7 @@ public class ProdutoProfile : Profile
         CreateMap<EditarProdutoViewModel, EditarProdutoDto>();
 
         CreateMap<DetalhesProdutoDto, EditarProdutoViewModel>();
+        CreateMap<DetalhesProdutoDto, ExcluirProdutoViewModel>();
+
     }
 }

@@ -99,6 +99,21 @@ public class ServicoProduto
         return Result.Ok();
     }
 
+    public Result Excluir(string id)
+    {
+        Produto? produto = repositorioProduto.SelecionarPorId(id);
+
+        if (produto == null)
+            return Result.Fail("Produto não encontrado.");
+
+        bool conseguiuExcluir = repositorioProduto.Excluir(produto);
+
+        if (!conseguiuExcluir)
+            return Result.Fail("Não foi possível excluir o produto.");
+
+        return Result.Ok();
+    }
+
     public List<ListarProdutosDto> SelecionarTodos()
     {
         List<Produto> produtos = repositorioProduto.SelecionarTodos();

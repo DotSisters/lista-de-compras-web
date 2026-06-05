@@ -96,6 +96,35 @@ public class ProdutoController(
         return RedirectToAction(nameof(Listar));
     }
 
+    [HttpGet]
+    public ActionResult Excluir(string id)
+    {
+        Result<DetalhesProdutoDto> resultado = servicoProduto.SelecionarPorId(id);
+
+        if (resultado.IsFailed)
+        {
+            TempData.AddErrorMessage(resultado);
+
+            return RedirectToAction(nameof(Listar));
+        }
+
+        ExcluirProdutoViewModel excluirVm =
+            mapeador.Map<ExcluirProdutoViewModel>(resultado.Value);
+
+        return View(excluirVm);
+    }
+
+    [HttpPost]
+    public ActionResult Excluir(ExcluirProdutoViewModel excluirVm)
+    {
+        Result resultado = servicoProduto.Excluir(excluirVm.Id);
+
+        if (resultado.IsFailed)
+            TempData.AddErrorMessage(resultado);
+
+        return RedirectToAction(nameof(Listar));
+    }
+
     private List<OpcaoCategoriaViewModel> SelecionarCategorias()
     {
         List<ListarCategoriasDto> dtos = servicoCategoria.SelecionarTodos();
