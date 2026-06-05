@@ -57,6 +57,45 @@ public class ProdutoController(
         return RedirectToAction(nameof(Listar));
     }
 
+
+    [HttpGet]
+    public ActionResult Editar(string id)
+    {
+        Result<DetalhesProdutoDto> resultado = servicoProduto.SelecionarPorId(id);
+
+        if (resultado.IsFailed)
+        {
+            TempData.AddErrorMessage(resultado);
+
+            return RedirectToAction(nameof(Listar));
+        }
+
+        EditarProdutoViewModel editarVm =
+            mapeador.Map<EditarProdutoViewModel>(resultado.Value) with { Categorias = SelecionarCategorias() };
+
+        return View(editarVm);
+    }
+
+    [HttpPost]
+    public ActionResult Editar(EditarProdutoViewModel editarVm)
+    {
+        if (!ModelState.IsValid)
+            return View(editarVm with { Categorias = SelecionarCategorias() });
+
+        EditarProdutoDto dto = mapeador.Map<EditarProdutoDto>(editarVm);
+
+        Result resultado = servicoProduto.Editar(dto);
+
+        if (resultado.IsFailed)
+        {
+            ModelState.AddModelError(resultado);
+
+            return View(editarVm with { Categorias = SelecionarCategorias() });
+        }
+
+        return RedirectToAction(nameof(Listar));
+    }
+
     private List<OpcaoCategoriaViewModel> SelecionarCategorias()
     {
         List<ListarCategoriasDto> dtos = servicoCategoria.SelecionarTodos();

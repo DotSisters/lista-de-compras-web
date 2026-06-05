@@ -12,6 +12,8 @@ public class ProdutoProfile : Profile
         CreateMap<ListarCategoriasDto, OpcaoCategoriaViewModel>();
 
         CreateMap<CadastrarProdutoViewModel, CadastrarProdutoDto>();
+        CreateMap<EditarProdutoViewModel, EditarProdutoDto>();
 
+        CreateMap<DetalhesProdutoDto, EditarProdutoViewModel>();
     }
 }

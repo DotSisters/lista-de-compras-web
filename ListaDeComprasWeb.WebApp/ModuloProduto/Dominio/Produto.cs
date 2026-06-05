@@ -9,6 +9,7 @@ public sealed class Produto : EntidadeBase<Produto>
     public string UnidadeMedida { get; set; }
     public decimal PrecoAproximado { get; set; }
     public Categoria Categoria { get; set; }
+
     public Produto()
     {
     }

@@ -15,6 +15,14 @@ public record CadastrarProdutoDto(
     string CategoriaNome
 );
 
+public record EditarProdutoDto(
+    string Id,
+    string Nome,
+    string UnidadeMedida,
+    decimal PrecoAproximado,
+    string CategoriaNome
+);
+
 public record DetalhesProdutoDto(
     string Id,
     string Nome,
