@@ -1,17 +1,21 @@
 using ListaDeComprasWeb.WebApp.ModuloCategoria.Dominio;
 using FluentResults;
+using ListaDeComprasWeb.WebApp.ModuloProduto.Dominio;
 
 namespace ListaDeComprasWeb.WebApp.ModuloCategoria.Aplicacao;
 
 public class ServicoCategoria
 {
     private readonly IRepositorioCategoria repositorioCategoria;
+    private readonly IRepositorioProduto repositorioProduto;
 
     public ServicoCategoria(
-        IRepositorioCategoria repositorioCategoria
+        IRepositorioCategoria repositorioCategoria,
+        IRepositorioProduto repositorioProduto
     )
     {
         this.repositorioCategoria = repositorioCategoria;
+        this.repositorioProduto = repositorioProduto;
     }
 
     public Result Cadastrar(CadastrarCategoriaDto dto)
@@ -50,6 +54,13 @@ public class ServicoCategoria
 
         if (categoria == null)
             return Result.Fail("Categoria não encontrada.");
+
+        // Verifica se existe pelo menos um produto vinculado à categoria
+        if (repositorioProduto.SelecionarTodos()
+            .Any(p => p.Categoria != null && p.Categoria.Id == id))
+        {
+            return Result.Fail("Esta categoria não pode ser excluída pois está relacionada a um produto.");
+        }
 
         bool conseguiuExcluir = repositorioCategoria.Excluir(categoria);
 
