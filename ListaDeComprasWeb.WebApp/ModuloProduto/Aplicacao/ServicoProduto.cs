@@ -30,11 +30,19 @@ public class ServicoProduto
             );
         }
 
+        if (ExisteProdutoMesmoNome(dto.Nome, "", categoriaSelecionada.Nome))
+        {
+            return Result.Fail(
+                new Error("Já existe um produto com esse nome nesta categoria.")
+                    .WithMetadata("Campo", nameof(dto.Nome))
+            );
+        }
+
         Produto novoProduto = new Produto(
             dto.Nome,
             dto.UnidadeMedida,
             dto.PrecoAproximado,
-            categoriaSelecionada!
+            categoriaSelecionada
         );
 
         repositorioProduto.Cadastrar(novoProduto);
@@ -75,7 +83,7 @@ public class ServicoProduto
             );
         }
 
-        if (ExisteProdutoMesmoNome(dto.Nome, dto.Id, categoriaSelecionada.Id))
+        if (ExisteProdutoMesmoNome(dto.Nome, dto.Id, categoriaSelecionada.Nome))
         {
             return Result.Fail(
                 new Error("Já existe um produto com esse nome nesta categoria.")
@@ -129,15 +137,14 @@ public class ServicoProduto
             .ToList();
     }
 
-    private bool ExisteProdutoMesmoNome(string nome, string idIgnorado, string categoriaId)
+    private bool ExisteProdutoMesmoNome(string nome, string idIgnorado, string categoriaNome)
     {
-        List<Produto> produtos = repositorioProduto.SelecionarTodos();
-
-        return produtos.Any(p =>
-            p.Id != idIgnorado &&
-            p.Categoria.Id == categoriaId &&
-            string.Equals(p.Nome, nome, StringComparison.OrdinalIgnoreCase)
-        );
+        return repositorioProduto.SelecionarTodos()
+            .Any(p =>
+                p.Id != idIgnorado &&
+                p.Categoria != null &&
+                p.Categoria.Nome.Equals(categoriaNome, StringComparison.OrdinalIgnoreCase) &&
+                p.Nome.Equals(nome, StringComparison.OrdinalIgnoreCase)
+            );
     }
-
 }

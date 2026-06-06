@@ -47,6 +47,7 @@ public class ProdutoController(
 
         Result resultado = servicoProduto.Cadastrar(dto);
 
+
         if (resultado.IsFailed)
         {
             ModelState.AddModelError(resultado);
