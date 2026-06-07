@@ -10,6 +10,12 @@
     <Folder Include="Compartilhado\" />
     <Folder Include="Compartilhado\Apresentacao\" />
     <Folder Include="Compartilhado\Views\" />
+    <Folder Include="ModuloItemLista/" />
+    <Folder Include="ModuloItemLista/Aplicacao/" />
+    <Folder Include="ModuloItemLista/Apresentacao/" />
+    <Folder Include="ModuloItemLista/Apresentacao/Views/" />
+    <Folder Include="ModuloItemLista/Dominio/" />
+    <Folder Include="ModuloItemLista/Infra/" />
     <Folder Include="ModuloProduto\" />
     <Folder Include="ModuloProduto\Infra\" />
     <Folder Include="ModuloListaCompras/Aplicacao/" />

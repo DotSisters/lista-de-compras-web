@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 using ListaDeComprasWeb.WebApp.ModuloCategoria.Dominio;
 using ListaDeComprasWeb.WebApp.ModuloProduto.Dominio;
 using ListaDeComprasWeb.WebApp.ModuloListaCompras.Dominio;
+using ListaDeComprasWeb.WebApp.ModuloItemLista.Dominio;
 
 namespace ListaDeComprasWeb.WebApp.Compartilhado.Infra.Arquivos;
 
@@ -12,6 +13,7 @@ public sealed class ContextoJson
     public List<Categoria> Categorias { get; set; } = new List<Categoria>();
     public List<Produto> Produtos { get; set; } = new List<Produto>();
     public List<ListaCompras> ListasDeCompras { get; set; } = new List<ListaCompras>();
+    public List<ItemLista> ItensDaLista { get; set; } = new List<ItemLista>();
 
     private readonly string caminhoArquivo;
 
@@ -59,5 +61,6 @@ public sealed class ContextoJson
         Categorias = contextoSalvo.Categorias;
         Produtos = contextoSalvo.Produtos;
         ListasDeCompras = contextoSalvo.ListasDeCompras;
+        ItensDaLista = contextoSalvo.ItensDaLista;
     }
 }
