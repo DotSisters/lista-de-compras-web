@@ -45,7 +45,7 @@ ViewBag.Titulo = "Listagem de Produtos";
                     <td>@p.PrecoAproximado</td>
                     <td>@p.CategoriaNome</td>
                     <td>
-                        <div class="d-flex gap-2">
+                        <div class="d-flex flex-sm-row flex-column gap-2">
                             <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Editar"
                                 asp-route-id="@p.Id">Editar</a>
                             <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Excluir"
