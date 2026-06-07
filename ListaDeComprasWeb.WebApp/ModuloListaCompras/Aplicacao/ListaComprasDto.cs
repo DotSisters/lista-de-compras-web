@@ -15,10 +15,13 @@ public record CadastrarListaDeCompraDto(
 
 public record EditarListaDeComprasDto(
     string Id,
-    string Nome
+    string Nome,
+    StatusListaCompras Status
 );
 
 public record DetalhesListaDeComprasDto(
     string Id,
-    string Nome
+    string Nome,
+    DateTime DataCriacao,
+    StatusListaCompras Status
 );

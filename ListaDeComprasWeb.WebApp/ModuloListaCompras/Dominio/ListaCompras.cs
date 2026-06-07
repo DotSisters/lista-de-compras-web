@@ -12,7 +12,7 @@ public class ListaCompras : EntidadeBase<ListaCompras>
     public DateTime DataCriacao { get; private set; }
 
     [JsonInclude]
-    public StatusListaCompras Status { get; private set; }
+    public StatusListaCompras Status { get; set; }
 
     public ListaCompras()
     {
@@ -40,8 +40,14 @@ public class ListaCompras : EntidadeBase<ListaCompras>
     {
         List<string> erros = new List<string>();
 
-        if (Nome.Length < 3 || Nome.Length > 100)
+        if (string.IsNullOrWhiteSpace(Nome))
+            erros.Add("O campo \"Nome\" deve ser preenchido.");
+
+        else if (Nome.Length < 3 || Nome.Length > 100)
             erros.Add("O campo \"Nome\" deve conter entre 3 e 100 caracteres.");
+
+        if (!Enum.IsDefined(Status))
+            erros.Add("O campo \"Status\" deve conter uma seleção válida.");
 
         return erros;
     }
@@ -49,5 +55,6 @@ public class ListaCompras : EntidadeBase<ListaCompras>
     public override void AtualizarDados(ListaCompras listaAtualizada)
     {
         Nome = listaAtualizada.Nome;
+        Status = listaAtualizada.Status;
     }
 }

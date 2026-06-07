@@ -1,4 +1,6 @@
-﻿@{
+﻿@using ListaDeComprasWeb.WebApp.ModuloListaCompras.Dominio
+
+@{
   Layout = "_Layout";
   ViewBag.Titulo = "Edição de Lista de Compras";
 }
@@ -14,6 +16,12 @@
     <label asp-for="Nome" class="form-label fw-semibold text-primary text-uppercase small">Nome</label>
     <input asp-for="Nome" type="text" class="form-control">
     <span asp-validation-for="Nome" class="text-danger small fw-semibold"></span>
+  </div>
+
+  <div class="mb-4">
+    <label asp-for="Status" class="form-label">Status</label>
+    <select asp-for="Status" asp-items="Html.GetEnumSelectList<StatusListaCompras>()" class="form-select"></select>
+    <span asp-validation-for="Status" class="text-danger small"></span>
   </div>
 
   <div class="d-flex justify-content-end gap-2 mt-4">

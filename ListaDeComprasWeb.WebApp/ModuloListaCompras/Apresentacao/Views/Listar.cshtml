@@ -5,7 +5,7 @@
 
 @model List<ListarListasDeComprasViewModel>;
 
-<a class="btn btn-outline-primary rounded-pill px-4 mb-3" asp-action="Cadastrar">Cadastrar Novo</a>
+<a class="btn btn-outline-primary rounded-pill px-4 mb-3" asp-action="Cadastrar">Nova Lista</a>
 
 @if (TempData["MensagemErro"] is string mensagemErro)
 {
@@ -40,10 +40,19 @@ else
 
             <dl class="row g-2 mb-4">
               <dt class="col-6 text-secondary fw-semibold">Status</dt>
-              <dd class="col-6 mb-0 text-break">@l.Status</dd>
+              <dd class="col-6 mb-0 text-break">
+                <span
+                class="badge rounded-pill @(
+                l.Status == "Aberta" ? "bg-success" :
+                l.Status == "Concluída" ? "bg-dark text-white" :
+                "bg-secondary text-white"
+                                                                                                                                  )">@l.Status</span>
+              </dd>
             </dl>
 
             <div class="d-flex flex-wrap gap-2 mt-auto justify-content-end">
+              <a class="btn btn-outline-success btn-sm rounded-pill px-3" asp-controller="ItemLista" asp-action="Listar"
+                 asp-route-id="@l.Id">Itens</a>
               <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Editar"
                  asp-route-id="@l.Id">Editar</a>
               <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Excluir"

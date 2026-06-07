@@ -23,11 +23,14 @@ public class ServicoListaCompras
 
     public Result Cadastrar(CadastrarListaDeCompraDto dto)
     {
-        ListaCompras novaListaDeCompras = new ListaCompras(
-            dto.Nome
-        );
+        ListaCompras novaListaDeCompras = new ListaCompras(dto.Nome);
 
         repositorioListaCompras.Cadastrar(novaListaDeCompras);
+
+        List<string> erros = novaListaDeCompras.Validar();
+
+        if (erros.Count > 0)
+            return Result.Fail(erros);
 
         return Result.Ok();
     }
@@ -35,7 +38,15 @@ public class ServicoListaCompras
     public Result Editar(EditarListaDeComprasDto dto)
     {
 
-        ListaCompras listaAtualizada = new ListaCompras(dto.Nome);
+        ListaCompras listaAtualizada = new ListaCompras(dto.Nome)
+        {
+            Status = dto.Status
+        };
+
+        List<string> erros = listaAtualizada.Validar();
+
+        if (erros.Count > 0)
+            return Result.Fail(erros);
 
         bool conseguiuEditar = repositorioListaCompras.Editar(dto.Id, listaAtualizada);
 
@@ -67,6 +78,7 @@ public class ServicoListaCompras
         if (lista == null)
             return Result.Fail("Lista de compras não encontrada.");
 
-        return Result.Ok(new DetalhesListaDeComprasDto(lista.Id, lista.Nome));
+        return Result.Ok(new DetalhesListaDeComprasDto(lista.Id, lista.Nome, lista.DataCriacao,
+            lista.Status));
     }
 }
