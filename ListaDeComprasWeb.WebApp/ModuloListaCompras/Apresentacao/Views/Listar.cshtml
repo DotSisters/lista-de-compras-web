@@ -6,7 +6,7 @@
 
 @model List<ListarListasDeComprasViewModel>;
 
-<a class="btn btn-primary rounded-pill px-4 mb-3" asp-action="Cadastrar">Cadastrar Lista</a>
+<a class="btn btn-primary rounded-pill px-4 mb-4" asp-action="Cadastrar">Cadastrar Lista</a>
 
 @if (TempData["MensagemErro"] is string mensagemErro)
 {
@@ -46,7 +46,7 @@ else
               l.Status == "Aberta" ? "bg-success" :
               l.Status == "Concluída" ? "bg-dark text-white" :
               "bg-secondary text-white"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                )">@l.Status</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        )">@l.Status</span>
             </td>
             <td>@l.DataCriacao.ToString("dd/MM/yyyy")</td>
             <td>
