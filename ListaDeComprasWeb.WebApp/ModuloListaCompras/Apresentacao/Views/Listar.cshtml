@@ -30,6 +30,8 @@ else
           <th>Nome</th>
           <th>ID</th>
           <th>Status</th>
+          <th>Quantidade de Itens</th>
+          <th>Total estimado</th>
           <th>Data de Criação</th>
           <th>Ações</th>
         </tr>
@@ -48,6 +50,8 @@ else
               "bg-secondary text-white"
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         )">@l.Status</span>
             </td>
+            <td>@l.QuantidadeDeItens</td>
+            <td>@l.TotalEstimado.ToString("C")</td>
             <td>@l.DataCriacao.ToString("dd/MM/yyyy")</td>
             <td>
               <div class="d-flex flex-sm-row flex-column gap-2">

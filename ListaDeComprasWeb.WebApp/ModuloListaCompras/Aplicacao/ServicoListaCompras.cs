@@ -1,4 +1,5 @@
 using FluentResults;
+using ListaDeComprasWeb.WebApp.ModuloItemLista.Dominio;
 using ListaDeComprasWeb.WebApp.ModuloListaCompras.Dominio;
 
 namespace ListaDeComprasWeb.WebApp.ModuloListaCompras.Aplicacao;
@@ -6,18 +7,27 @@ namespace ListaDeComprasWeb.WebApp.ModuloListaCompras.Aplicacao;
 public class ServicoListaCompras
 {
     private readonly IRepositorioListaCompras repositorioListaCompras;
+    private readonly IRepositorioItemLista repositorioItemLista;
 
-    public ServicoListaCompras(IRepositorioListaCompras repositorioListaCompras)
+    public ServicoListaCompras(IRepositorioListaCompras repositorioListaCompras, IRepositorioItemLista repositorioItemLista)
     {
         this.repositorioListaCompras = repositorioListaCompras;
+        this.repositorioItemLista = repositorioItemLista;
     }
 
     public List<ListarListasDeComprasDto> SelecionarTodos()
     {
-        List<ListaCompras> categorias = repositorioListaCompras.SelecionarTodos();
+        List<ListaCompras> listaCompras = repositorioListaCompras.SelecionarTodos();
 
-        return categorias
-            .Select(l => new ListarListasDeComprasDto(l.Id, l.Nome, l.DataCriacao, l.Status.ToString()))
+        return listaCompras
+            .Select(l =>
+            {
+                List<ItemLista> itensDaLista = repositorioItemLista.Filtrar(i => i.ListaCompras.Id == l.Id);
+                int quantidadeDeItens = itensDaLista.Count;
+                decimal totalEstimado = itensDaLista.Sum(i => i.CalcularValorTotal());
+
+                return new ListarListasDeComprasDto(l.Id, l.Nome, l.DataCriacao, l.Status.ToString(), quantidadeDeItens, totalEstimado);
+            })
             .ToList();
     }
 
@@ -61,12 +71,17 @@ public class ServicoListaCompras
         ListaCompras? lista = repositorioListaCompras.SelecionarPorId(id);
 
         if (lista == null)
-            return Result.Fail("Lista de compras não encontrada.");
+            return Result.Fail("A Lista de compras não foi encontrada.");
+
+        List<ItemLista> itensDaLista = repositorioItemLista.Filtrar(i => i.ListaCompras.Id == id);
+
+        if (itensDaLista.Count > 0)
+            return Result.Fail("Não é possível excluir uma lista enquanto houver itens vinculados a ela.");
 
         bool conseguiuExcluir = repositorioListaCompras.Excluir(lista);
 
         if (!conseguiuExcluir)
-            return Result.Fail("Não foi possível excluir a categoria.");
+            return Result.Fail("Não foi possível excluir a lista.");
 
         return Result.Ok();
     }

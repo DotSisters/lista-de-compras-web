@@ -7,7 +7,9 @@ public record ListarListasDeComprasViewModel(
     string Id,
     string Nome,
     DateTime DataCriacao,
-    string Status
+    string Status,
+    int QuantidadeDeItens,
+    decimal TotalEstimado
 );
 
 public record CadastrarListaDeComprasViewModel(

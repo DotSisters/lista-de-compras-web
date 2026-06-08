@@ -6,7 +6,9 @@ public record ListarListasDeComprasDto(
     string Id,
     string Nome,
     DateTime DataCriacao,
-    string Status
+    string Status,
+    int QuantidadeDeItens,
+    decimal TotalEstimado
 );
 
 public record CadastrarListaDeCompraDto(
