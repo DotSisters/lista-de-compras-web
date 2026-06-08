@@ -1,11 +1,12 @@
 ﻿@{
   Layout = "_Layout";
-  ViewBag.Titulo = "Listagem de Listas de Compras";
+  ViewBag.Titulo = "Listas de Compras";
+  ViewBag.Info = "Gerencie suas listas de compras com facilidade, mantendo tudo organizado e pronto para suas próximas compras.";
 }
 
 @model List<ListarListasDeComprasViewModel>;
 
-<a class="btn btn-outline-primary rounded-pill px-4 mb-3" asp-action="Cadastrar">Nova Lista</a>
+<a class="btn btn-primary rounded-pill px-4 mb-3" asp-action="Cadastrar">Cadastrar Lista</a>
 
 @if (TempData["MensagemErro"] is string mensagemErro)
 {
@@ -22,45 +23,45 @@
 }
 else
 {
-  <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-2">
-    @foreach (ListarListasDeComprasViewModel l in Model)
-    {
-      <div class="col">
-        <div class="card h-100">
-          <div class="card-body">
-            <div class="d-flex justify-content-between mb-3">
-              <h5 class="card-title mb-0">@l.Nome</h5>
-              <span class="badge text-bg-primary rounded-pill">#@l.Id</span>
-            </div>
-
-            <dl class="row g-2 mb-4">
-              <dt class="col-6 text-secondary fw-semibold">Data de Criação</dt>
-              <dd class="col-6 mb-0 text-break">@l.DataCriacao.ToString("dd/MM/yyyy")</dd>
-            </dl>
-
-            <dl class="row g-2 mb-4">
-              <dt class="col-6 text-secondary fw-semibold">Status</dt>
-              <dd class="col-6 mb-0 text-break">
-                <span
-                class="badge rounded-pill @(
-                l.Status == "Aberta" ? "bg-success" :
-                l.Status == "Concluída" ? "bg-dark text-white" :
-                "bg-secondary text-white"
-                                                                                                                                  )">@l.Status</span>
-              </dd>
-            </dl>
-
-            <div class="d-flex flex-wrap gap-2 mt-auto justify-content-end">
-              <a class="btn btn-outline-success btn-sm rounded-pill px-3" asp-controller="ItemLista" asp-action="Listar"
-                 asp-route-id="@l.Id">Itens</a>
-              <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Editar"
-                 asp-route-id="@l.Id">Editar</a>
-              <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Excluir"
-                 asp-route-id="@l.Id">Excluir</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    }
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered align-middle bg-white">
+      <thead class="table-primary">
+        <tr>
+          <th>Nome</th>
+          <th>ID</th>
+          <th>Status</th>
+          <th>Data de Criação</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach (ListarListasDeComprasViewModel l in Model)
+        {
+          <tr>
+            <td class="fw-semibold">@l.Nome</td>
+            <td>@l.Id</td>
+            <td>
+              <span
+              class="badge rounded-pill @(
+              l.Status == "Aberta" ? "bg-success" :
+              l.Status == "Concluída" ? "bg-dark text-white" :
+              "bg-secondary text-white"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                )">@l.Status</span>
+            </td>
+            <td>@l.DataCriacao.ToString("dd/MM/yyyy")</td>
+            <td>
+              <div class="d-flex flex-sm-row flex-column gap-2">
+                <a class="btn btn-primary btn-sm rounded-pill px-3" asp-controller="ItemLista" asp-action="Listar"
+                   asp-route-listaId="@l.Id">Itens</a>
+                <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Editar"
+                   asp-route-id="@l.Id">Editar</a>
+                <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Excluir"
+                   asp-route-id="@l.Id">Excluir</a>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
   </div>
 }
