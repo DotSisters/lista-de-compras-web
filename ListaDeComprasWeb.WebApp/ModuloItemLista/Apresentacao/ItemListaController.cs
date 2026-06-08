@@ -118,10 +118,10 @@ public class ItemListaController(
         {
             TempData.AddErrorMessage(resultado);
 
-            return RedirectToAction(nameof(Listar), new { listaCompraId = excluirVm.IdLista });
+            return RedirectToAction(nameof(Listar), new { listaId = excluirVm.IdLista });
         }
 
-        return RedirectToAction(nameof(Listar), new { listaCompraId = excluirVm.IdLista });
+        return RedirectToAction(nameof(Listar), new { listaId = excluirVm.IdLista });
     }
 
 }
