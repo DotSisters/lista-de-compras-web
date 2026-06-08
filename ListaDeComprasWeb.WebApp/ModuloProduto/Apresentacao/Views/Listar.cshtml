@@ -1,12 +1,13 @@
 @{
   Layout = "_Layout";
-  ViewBag.Titulo = "Listagem de Produtos";
+  ViewBag.Titulo = "Produtos";
+  ViewBag.Info = "Cadastre, visualize e gerencie produtos para adicioná-los nas suas listas de compras.";
 }
 
 @model List<ListarProdutosViewModel>;
 
 
-<a class="btn btn-primary rounded-pill px-4 mb-3" asp-action="Cadastrar">Cadastrar Novo</a>
+<a class="btn btn-primary rounded-pill px-4 mb-4" asp-action="Cadastrar">Cadastrar Produto</a>
 
 @if (TempData["MensagemErro"] is string mensagemErro)
 {
