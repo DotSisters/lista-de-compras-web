@@ -29,3 +29,15 @@ public record DadosCadastroItemListaDto(
     string NomeLista,
     List<DadosProdutoDto> Produtos
 );
+
+public record DetalhesItemDaListaDto(
+    string Id,
+    string IdLista,
+    string NomeLista,
+    string ProdutoId,
+    string NomeProduto,
+    string NomeCategoria,
+    decimal Quantidade,
+    decimal PrecoAproximado,
+    decimal ValorTotal
+);

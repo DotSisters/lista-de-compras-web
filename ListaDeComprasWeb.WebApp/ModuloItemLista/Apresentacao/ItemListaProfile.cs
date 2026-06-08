@@ -9,10 +9,8 @@ public class ItemListaProfile : Profile
     {
         CreateMap<ListarItensDaListaDto, ListarItensDaListaViewModel>();
         CreateMap<CadastrarItemDaListaViewModel, CadastrarItemListaDto>();
-
         CreateMap<DadosProdutoDto, DadosProdutoViewModel>();
-
         CreateMap<DadosCadastroItemListaDto, DadosCadastroItemListaViewModel>();
-
+        CreateMap<DetalhesItemDaListaDto, ExcluirItemDaListaViewModel>();
     }
 }

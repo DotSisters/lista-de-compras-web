@@ -36,7 +36,7 @@ public record DadosCadastroItemListaViewModel(
     List<DadosProdutoViewModel> Produtos
 );
 
-public record ExcluirItemListaViewModel(
+public record ExcluirItemDaListaViewModel(
     string Id,
     string IdLista,
     string NomeLista,

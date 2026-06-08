@@ -7,7 +7,6 @@ namespace ListaDeComprasWeb.WebApp.ModuloItemLista.Aplicacao;
 
 public class ServicoItemLista
 {
-
     private readonly IRepositorioItemLista repositorioItemLista;
     private readonly IRepositorioListaCompras repositorioListaCompras;
     private readonly IRepositorioProduto repositorioProduto;
@@ -78,11 +77,19 @@ public class ServicoItemLista
         return Result.Ok();
     }
 
-    private static Result Falha(string campo, string mensagem)
+    public Result Excluir(string id)
     {
-        IError erro = new Error(mensagem).WithMetadata("Campo", campo);
+        ItemLista? item = repositorioItemLista.SelecionarPorId(id);
 
-        return Result.Fail(erro);
+        if (item == null)
+            return Result.Fail("Item da lista não foi encontrado.");
+
+        bool conseguiuExcluir = repositorioItemLista.Excluir(item);
+
+        if (!conseguiuExcluir)
+            return Result.Fail("Não foi possível excluir este item.");
+
+        return Result.Ok();
     }
 
     public Result<DadosCadastroItemListaDto> DadosCadastrais(string listaId)
@@ -109,5 +116,34 @@ public class ServicoItemLista
         );
 
         return Result.Ok(dto);
+    }
+
+    public Result<DetalhesItemDaListaDto> SelecionarPorId(string id)
+    {
+        ItemLista? item = repositorioItemLista.SelecionarPorId(id);
+
+        if (item == null)
+            return Result.Fail("Item da lista não foi encontrado.");
+
+        DetalhesItemDaListaDto dto = new DetalhesItemDaListaDto(
+            item.Id,
+            item.ListaCompras.Id,
+            item.ListaCompras.Nome,
+            item.Produto.Id,
+            item.Produto.Nome,
+            item.Produto.Categoria.Nome,
+            item.Quantidade,
+            item.Produto.PrecoAproximado,
+            item.CalcularValorTotal()
+        );
+
+        return Result.Ok(dto);
+    }
+
+    private static Result Falha(string campo, string mensagem)
+    {
+        IError erro = new Error(mensagem).WithMetadata("Campo", campo);
+
+        return Result.Fail(erro);
     }
 }

@@ -32,7 +32,6 @@ public class ItemListaController(
         return View(listarVms);
     }
 
-
     [HttpGet]
     public ActionResult Cadastrar(string listaId)
     {
@@ -90,6 +89,39 @@ public class ItemListaController(
         }
 
         return RedirectToAction(nameof(Listar), new { listaId = cadastrarVm.ListaId });
+    }
+
+    [HttpGet]
+    public ActionResult Excluir(string id)
+    {
+        Result<DetalhesItemDaListaDto> resultado = servicoItemLista.SelecionarPorId(id);
+
+        if (resultado.IsFailed)
+        {
+            TempData.AddErrorMessage(resultado);
+
+            return RedirectToAction("Listar", "ListaCompras");
+        }
+
+        ExcluirItemDaListaViewModel excluirVm =
+            mapeador.Map<ExcluirItemDaListaViewModel>(resultado.Value);
+
+        return View(excluirVm);
+    }
+
+    [HttpPost]
+    public ActionResult Excluir(ExcluirItemDaListaViewModel excluirVm)
+    {
+        Result resultado = servicoItemLista.Excluir(excluirVm.Id);
+
+        if (resultado.IsFailed)
+        {
+            TempData.AddErrorMessage(resultado);
+
+            return RedirectToAction(nameof(Listar), new { listaCompraId = excluirVm.IdLista });
+        }
+
+        return RedirectToAction(nameof(Listar), new { listaCompraId = excluirVm.IdLista });
     }
 
 }
