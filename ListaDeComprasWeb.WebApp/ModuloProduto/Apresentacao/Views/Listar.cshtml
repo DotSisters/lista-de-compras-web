@@ -6,6 +6,21 @@
 
 @model List<ListarProdutosViewModel>;
 
+@* <style>
+  .table-transparent,
+  .table-transparent tbody tr,
+  .table-transparent tbody tr td,
+  .table-transparent thead th {
+    background-color: transparent !important;
+  }
+
+  .table-thicker-borders,
+  .table-thicker-borders th,
+  .table-thicker-borders td {
+    border-width: 2px !important;
+    border-color: #B9D3EE !important;
+  }
+</style> *@
 
 <a class="btn btn-primary rounded-pill px-4 mb-4" asp-action="Cadastrar">Cadastrar Produto</a>
 
@@ -26,7 +41,7 @@ else
 {
   <div class="table-responsive">
     <table class="table table-hover table-bordered align-middle bg-white">
-      <thead class="table-primary">
+      <thead class=" table-primary">
         <tr>
           <th>ID</th>
           <th>Nome</th>
@@ -39,7 +54,7 @@ else
       <tbody>
         @foreach (ListarProdutosViewModel p in Model)
         {
-          <tr>
+          <tr class="bg-transparent">
             <td>@p.Id</td>
             <td>@p.Nome</td>
             <td>@p.UnidadeMedida</td>

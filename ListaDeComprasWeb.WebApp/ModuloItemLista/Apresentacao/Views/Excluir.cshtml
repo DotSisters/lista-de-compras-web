@@ -1,4 +1,4 @@
-﻿@{
+@{
   Layout = "_Layout";
   ViewBag.Titulo = "Excluir Item";
   ViewBag.Info = "Confirme a exclusão deste item da lista.";
@@ -6,13 +6,13 @@
 
 @model ExcluirItemDaListaViewModel;
 
-<form class="card border-primary-subtle shadow-sm mx-auto p-4" style="max-width: 620px;" asp-action="Excluir"
-      asp-route-id="@Model.Id" method="post">
+<form class="card border-primary-subtle shadow-sm mx-auto p-4 bg-transparent" style="max-width: 620px;"
+      asp-action="Excluir" asp-route-id="@Model.Id" method="post">
 
   <input type="hidden" asp-for="Id" />
   <input type="hidden" asp-for="IdLista" />
 
-  <div class="alert alert-primary border-start border-primary border-4 rounded-3" role="alert">
+  <div class="alert alert-warning border-start border-primary border-1 rounded-3" role="alert">
     Tem certeza que deseja remover este item da lista?
   </div>
 

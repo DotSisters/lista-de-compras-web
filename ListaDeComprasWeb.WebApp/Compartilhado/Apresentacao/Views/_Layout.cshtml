@@ -12,11 +12,17 @@
     <title>@ViewBag.Titulo - Lista de Compras</title>
 </head>
 
-<body>
+<body
+    style="
+        background-image: linear-gradient(-20deg, #accbee 0%, #e7f0fd 100%);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        min-height: 100vh;
+    ">
     @* Barra de Navegação *@
-    <nav class="navbar navbar-expand-lg bg-white border-bottom">
+    <nav class="navbar navbar-expand-lg bg-white border-bottom" style="background-image: linear-gradient(120deg, #3279dd 0%, #0d6efd 100%);">
         <div class="container">
-            <a class="navbar-brand fw-semibold" asp-controller="Home" asp-action="Index">Shopping List</a>
+            <a class="navbar-brand fw-semibold text-white" asp-controller="Home" asp-action="Index">Shopping List</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,10 +31,10 @@
 
             <div class="collapse navbar-collapse" id="menuPrincipal">
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-link" asp-controller="Home" asp-action="Index">Início</a>
-                    <a class="nav-link" asp-controller="Categoria" asp-action="Listar">Categorias</a>
-                    <a class="nav-link" asp-controller="Produto" asp-action="Listar">Produtos</a>
-                    <a class="nav-link" asp-controller="ListaCompras" asp-action="Listar">Listas</a>
+                    <a class="nav-link text-white" asp-controller="Home" asp-action="Index">Início</a>
+                    <a class="nav-link text-white" asp-controller="Categoria" asp-action="Listar">Categorias</a>
+                    <a class="nav-link text-white" asp-controller="Produto" asp-action="Listar">Produtos</a>
+                    <a class="nav-link text-white" asp-controller="ListaCompras" asp-action="Listar">Listas</a>
                 </div>
             </div>
         </div>
