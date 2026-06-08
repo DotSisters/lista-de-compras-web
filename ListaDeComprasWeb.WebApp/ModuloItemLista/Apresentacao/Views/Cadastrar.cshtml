@@ -12,8 +12,8 @@
 
   <input asp-for="ListaId" type="hidden" />
 
-  <div class="mb-3">
-    <label asp-for="ProdutoId" class="form-label">Produto</label>
+  <div class="mb-4">
+    <label asp-for="ProdutoId" class="form-label fw-semibold text-primary text-uppercase small">Produto</label>
     <select asp-for="ProdutoId" class="form-select">
       <option value="">Selecione um produto</option>
 
@@ -28,7 +28,7 @@
   </div>
 
   <div class="mb-4">
-    <label asp-for="Quantidade" class="form-label">Quantidade</label>
+    <label asp-for="Quantidade" class="form-label fw-semibold text-primary text-uppercase small">Quantidade</label>
     <input asp-for="Quantidade" class="form-control" type="number" min="0.01" step="0.01" />
     <span asp-validation-for="Quantidade" class="text-danger small"></span>
   </div>
