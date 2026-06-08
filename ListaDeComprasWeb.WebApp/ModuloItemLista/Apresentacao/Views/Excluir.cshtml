@@ -1,6 +1,7 @@
 ﻿@{
   Layout = "_Layout";
   ViewBag.Titulo = "Excluir Item";
+  ViewBag.Info = "Confirme a exclusão deste item da lista.";
 }
 
 @model ExcluirItemDaListaViewModel;
@@ -11,34 +12,47 @@
   <input type="hidden" asp-for="Id" />
   <input type="hidden" asp-for="IdLista" />
 
-  <div class="alert alert-primary border-start border-primary border-2 rounded-3" role="alert">
+  <div class="alert alert-primary border-start border-primary border-4 rounded-3" role="alert">
     Tem certeza que deseja remover este item da lista?
   </div>
 
-  <dl class="row mb-0">
-    <dt class="col-sm-4 fw-semibold text-primary text-uppercase small">Lista</dt>
-    <dd class="col-sm-8">@Model.NomeLista</dd>
+  <div class="row g-3 mb-3">
+    <div class="col-md-6">
+      <label class="form-label fw-semibold text-primary text-uppercase small">Lista</label>
+      <input type="text" class="form-control" value="@Model.NomeLista" disabled>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label fw-semibold text-primary text-uppercase small">Produto</label>
+      <input type="text" class="form-control" value="@Model.NomeProduto" disabled>
+    </div>
+  </div>
 
-    <dt class="col-sm-4 fw-semibold text-primary text-uppercase small">Produto</dt>
-    <dd class="col-sm-8">@Model.NomeProduto</dd>
+  <div class="row g-3 mb-3">
+    <div class="col-md-6">
+      <label class="form-label fw-semibold text-primary text-uppercase small">Categoria</label>
+      <input type="text" class="form-control" value="@Model.NomeCategoria" disabled>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label fw-semibold text-primary text-uppercase small">Quantidade</label>
+      <input type="text" class="form-control" value="@Model.Quantidade" disabled>
+    </div>
+  </div>
 
-    <dt class="col-sm-4 fw-semibold text-primary text-uppercase small">Categoria</dt>
-    <dd class="col-sm-8">@Model.NomeCategoria</dd>
-
-    <dt class="col-sm-4 fw-semibold text-primary text-uppercase small">Quantidade</dt>
-    <dd class="col-sm-8">@Model.Quantidade</dd>
-
-    <dt class="col-sm-4 fw-semibold text-primary text-uppercase small">Preço aproximado</dt>
-    <dd class="col-sm-8">@Model.PrecoAproximado.ToString("C")</dd>
-
-    <dt class="col-sm-4 fw-semibold text-primary text-uppercase small">Valor total</dt>
-    <dd class="col-sm-8">@Model.ValorTotal.ToString("C")</dd>
-  </dl>
+  <div class="row g-3 mb-3">
+    <div class="col-md-6">
+      <label class="form-label fw-semibold text-primary text-uppercase small">Preço Aproximado</label>
+      <input type="text" class="form-control" value="@Model.PrecoAproximado.ToString("C")" disabled>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label fw-semibold text-primary text-uppercase small">Valor Total</label>
+      <input type="text" class="form-control" value="@Model.ValorTotal.ToString("C")" disabled>
+    </div>
+  </div>
 
   <div class="d-flex justify-content-end gap-2 mt-4">
-    <a class="btn btn-outline-primary rounded-pill px-4 mt-2" asp-controller="ListaCompras"
-       asp-action="Listar">Voltar</a>
-
+    <a class="btn btn-outline-primary rounded-pill px-4" asp-action="Listar"
+       asp-route-listaId="@Model.IdLista">Voltar</a>
     <button class="btn btn-primary rounded-pill px-4" type="submit">Confirmar</button>
   </div>
 </form>
+
