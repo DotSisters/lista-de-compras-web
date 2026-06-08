@@ -1,0 +1,71 @@
+﻿@{
+  Layout = "_Layout";
+  ViewBag.Titulo = "Exclusão de Item da Lista";
+}
+
+@model ExcluirItemListaViewModel
+
+<div class="content-panel p-4">
+  <div class="alert alert-warning">
+    Tem certeza que deseja remover este item da lista?
+  </div>
+
+  <div class="row g-3 mb-4">
+    <div class="col-md-6">
+      <div class="border rounded p-3">
+        <span class="text-secondary small">Lista</span>
+        <div class="fw-semibold">@Model.NomeLista</div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="border rounded p-3">
+        <span class="text-secondary small">Produto</span>
+        <div class="fw-semibold">@Model.NomeProduto</div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="border rounded p-3">
+        <span class="text-secondary small">Categoria</span>
+        <div class="fw-semibold">@Model.NomeCategoria</div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="border rounded p-3">
+        <span class="text-secondary small">Quantidade</span>
+        <div class="fw-semibold">@Model.Quantidade</div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="border rounded p-3">
+        <span class="text-secondary small">Preço aproximado</span>
+        <div class="fw-semibold">@Model.PrecoAproximado.ToString("C")</div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="border rounded p-3">
+        <span class="text-secondary small">Valor total</span>
+        <div class="fw-semibold">@Model.ValorTotal.ToString("C")</div>
+      </div>
+    </div>
+  </div>
+
+  <form asp-action="Excluir" method="post">
+    <input asp-for="Id" type="hidden" />
+    <input asp-for="IdLista" type="hidden" />
+
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-danger">
+        Remover
+      </button>
+
+      <a class="btn btn-outline-secondary" asp-action="Listar" asp-route-listaCompraId="@Model.IdLista">
+        Cancelar
+      </a>
+    </div>
+  </form>
+</div>
